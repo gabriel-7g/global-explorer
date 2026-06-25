@@ -14,13 +14,13 @@ export function CountryCard({ country, onClick }: Props) {
     <button
       className="country-card"
       onClick={onClick}
-      aria-label={country.name.common}
+      aria-label={country.names.common}
     >
       <div className="card-flag">
-        <img src={country.flags.svg} alt={country.flags.alt || country.name.common} />
+        <img src={country.flag.url_svg} alt={country.flag.description || country.names.common} />
       </div>
       <div className="country-info">
-        <h2>{country.name.common}</h2>
+        <h2>{country.names.common}</h2>
         <div className="country-stats">
           <div className="stat-row">
             <FiUsers size={11} />

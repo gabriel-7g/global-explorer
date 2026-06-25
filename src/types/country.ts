@@ -1,30 +1,30 @@
 export interface Country {
-  name: { common: string };
-  flags: { svg: string; alt: string };
+  names: { common: string };
+  flag: { url_svg: string; description?: string };
   population: number;
   continents: string[];
   subregion?: string;
 }
 
 export interface DetailedCountry {
-  name: { common: string; official: string };
-  flags: { svg: string; alt?: string };
-  capital?: string[];
+  names: { common: string; official: string };
+  flag: { url_svg: string; description?: string };
+  capitals?: { name: string }[];
   region: string;
   subregion?: string;
-  languages?: { [key: string]: string };
+  languages?: { name: string; bcp47?: string }[];
   population: number;
-  area?: number;
-  currencies?: { [key: string]: { name: string; symbol: string } };
+  area?: { kilometers: number; miles: number };
+  currencies?: { [code: string]: { name: string; symbol: string } };
   timezones?: string[];
-  tld?: string[];
+  tlds?: string[];
   borders?: string[];
-  cca3: string;
+  codes: { alpha_3: string };
 }
 
 export interface BorderCountry {
-  name: { common: string };
-  cca3: string;
+  names: { common: string };
+  codes: { alpha_3: string };
 }
 
 export interface AiContent {
