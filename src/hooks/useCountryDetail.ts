@@ -46,12 +46,12 @@ export function useCountryDetail(name: string | undefined) {
     if (!country) return;
     setLoadingAI(true);
     try {
-      const genAI = new GoogleGenerativeAI(import.meta.env.VITE_API_KEY);
+      const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
       const model = genAI.getGenerativeModel({
         model: GEMINI_MODEL,
         generationConfig: { responseMimeType: 'application/json' },
       });
-      const prompt = translations[lang].aiPrompt(country.name.common);
+      const prompt = translations[lang].aiPrompt(country.names.common);
       const result = await model.generateContent(prompt);
       setAiContent(JSON.parse(result.response.text()));
     } catch {

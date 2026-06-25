@@ -40,7 +40,7 @@ function App() {
   }, [countries, setSubregions]);
 
   const filteredCountries = countries.filter((country) => {
-    const matchesName = country.name.common.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesName = country.names.common.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesSubregion = selectedSubregion === '' || country.subregion === selectedSubregion;
     return matchesName && matchesSubregion;
   });
@@ -70,9 +70,9 @@ function App() {
           {filteredCountries.length > 0 ? (
             filteredCountries.map((country) => (
               <CountryCard
-                key={country.name.common}
+                key={country.names.common}
                 country={country}
-                onClick={() => navigate(`/country/${encodeURIComponent(country.name.common)}`)}
+                onClick={() => navigate(`/country/${encodeURIComponent(country.names.common)}`)}
               />
             ))
           ) : (

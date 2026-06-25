@@ -29,8 +29,8 @@ const CountryDetail = () => {
     ? Object.values(country.currencies).map(c => `${c.name} (${c.symbol})`).join(', ')
     : 'N/A';
 
-  const languages = Object.values(country.languages || {}).join(', ') || 'N/A';
-  const tld = country.tld?.join(', ') || 'N/A';
+  const languages = country.languages?.map(l => l.name).join(', ') || 'N/A';
+  const tld = country.tlds?.join(', ') || 'N/A';
   const timezone = country.timezones?.[0] || 'N/A';
 
   return (
@@ -39,10 +39,10 @@ const CountryDetail = () => {
 
       <div className="detail-content">
         <div className="main-info">
-          <img src={country.flags.svg} alt={country.flags.alt || country.name.common} />
-          <h1>{country.name.common}</h1>
-          {country.name.official !== country.name.common && (
-            <p className="official-name">{country.name.official}</p>
+          <img src={country.flag.url_svg} alt={country.flag.description || country.names.common} />
+          <h1>{country.names.common}</h1>
+          {country.names.official !== country.names.common && (
+            <p className="official-name">{country.names.official}</p>
           )}
         </div>
 
@@ -52,7 +52,7 @@ const CountryDetail = () => {
 
             <div className="info-item">
               <span className="info-label">{t('capital')}</span>
-              <span>{country.capital?.join(', ') || 'N/A'}</span>
+              <span>{country.capitals?.map(c => c.name).join(', ') || 'N/A'}</span>
             </div>
             <div className="info-item">
               <span className="info-label">{t('region')}</span>
@@ -69,7 +69,7 @@ const CountryDetail = () => {
             {country.area != null && (
               <div className="info-item">
                 <span className="info-label">{t('area')}</span>
-                <span>{country.area.toLocaleString()} km²</span>
+                <span>{country.area.kilometers.toLocaleString()} km²</span>
               </div>
             )}
             <div className="info-item">
@@ -95,11 +95,11 @@ const CountryDetail = () => {
                 <div className="border-chips">
                   {borderCountries.map(bc => (
                     <button
-                      key={bc.cca3}
+                      key={bc.codes.alpha_3}
                       className="border-chip"
-                      onClick={() => navigate(`/country/${encodeURIComponent(bc.name.common)}`)}
+                      onClick={() => navigate(`/country/${encodeURIComponent(bc.names.common)}`)}
                     >
-                      {bc.name.common}
+                      {bc.names.common}
                     </button>
                   ))}
                 </div>
